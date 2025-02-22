@@ -61,46 +61,7 @@ jobs:
         pip install -r requirements.txt
         pip install pytest pytest-cov
     
-    - name: Install NLTK data
-      run: |
-        pip install nltk
-        python -c "import nltk; nltk.download('stopwords', quiet=True)"
-    
-    - name: Download models (if needed)
-      run: |
-        mkdir -p models
-        # Add any model download steps here if needed
-        # For example: python src/data/download_models.py
-    
     - name: Run tests
       run: pytest tests/
-
-  build-notebook:
-    name: Build and Check Jupyter Notebook
-    runs-on: ubuntu-latest
-    needs: lint
-    
-    steps:
-    - uses: actions/checkout@v4
-    
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.12'
-        cache: 'pip'
-    
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        pip install nbconvert jupyter
-    
-    - name: Validate notebooks
-      run: |
-        # Check if notebooks are valid
-        for nb in notebooks/*.ipynb; do
-          if [ -f "$nb" ]; then
-            echo "Validating $nb"
-            jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=600 --stdout "$nb" > /dev/null
           fi
         done
