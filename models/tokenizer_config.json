@@ -1,0 +1,6 @@
+{
+  "tokenizer_name": "Helsinki-NLP/opus-mt-en-mul",
+  "pad_token": "<pad>",
+  "unk_token": "<unk>",
+  "max_length": 128
+}
