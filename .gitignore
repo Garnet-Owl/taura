@@ -136,6 +136,4 @@ dmypy.json
 models/best_model/
 models/final_model/
 models/*.pt
-data/processed/
-data/tokenized/
 results/
