@@ -1,0 +1,8 @@
+{
+  "test_loss": 0.9770071506500244,
+  "bleu_score": 1.6526850525490153,
+  "model_path": "..\\..\\models\\best_model",
+  "tokenizer": "Helsinki-NLP/opus-mt-en-mul",
+  "test_set": "test",
+  "batch_size": 16
+}

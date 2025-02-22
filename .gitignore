@@ -133,7 +133,4 @@ dmypy.json
 *.swo
 
 # Project specific
-models/best_model/
-models/final_model/
-models/*.pt
-results/
+
