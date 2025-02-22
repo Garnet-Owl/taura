@@ -60,9 +60,3 @@ jobs:
               exit 1
             fi
           }
-
-      - name: Test Coverage
-        uses: codecov/codecov-action@v3
-        with:
-          flags: unittests
-          fail_ci_if_error: true
