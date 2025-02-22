@@ -189,9 +189,9 @@ def get_model_size(model):
 if __name__ == "__main__":
     # Example usage
     local_model_path = "../../models/best_model"  # Replace with your actual path
-    translator = KikuyuEnglishTranslator(model_name=local_model_path) #load local model
+    translator = KikuyuEnglishTranslator(model_name=local_model_path)  # load local model
     print(f"Model size: {get_model_size(translator.model):.2f} MB")
 
-    tokenizer = AutoTokenizer.from_pretrained("Helsinki-NLP/opus-mt-en-mul") # load same tokenizer as when training
+    tokenizer = AutoTokenizer.from_pretrained("Helsinki-NLP/opus-mt-en-mul")  # load same tokenizer as when training
     translation = translator.translate("Hello, how are you?", tokenizer)
     print(f"Translation: {translation}")
