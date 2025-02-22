@@ -1,0 +1,43 @@
+name: Dependency Updates
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'  # Run weekly on Sunday at midnight
+  workflow_dispatch:  # Allow manual triggering
+
+jobs:
+  update-dependencies:
+    name: Update Dependencies
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    
+    - name: Install pip-tools
+      run: |
+        python -m pip install --upgrade pip
+        pip install pip-tools
+    
+    - name: Update dependencies
+      run: |
+        # Compile fresh requirements.txt from setup.py/requirements.in
+        # If you're using pip-compile, uncomment the following:
+        # pip-compile --upgrade requirements.in
+    
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v5
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: Update dependencies
+        title: 'chore: Update dependencies'
+        body: |
+          This PR updates the project dependencies to their latest versions.
+          
+          It was automatically created by the Dependency Updates workflow.
+        branch: update-dependencies
+        base: main
