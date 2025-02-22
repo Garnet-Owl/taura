@@ -3,7 +3,6 @@ Utility functions for preprocessing Taura datasets.
 """
 
 
-
 def load_dataset():
     """
     Load the raw Excel dataset.
