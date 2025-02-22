@@ -30,7 +30,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
 
@@ -46,17 +46,23 @@ jobs:
       - name: Check formatting with Ruff
         run: ruff format --check . --exclude notebooks/
 
+      - name: Create tests directory (if it doesn't exist)
+        run: |
+          mkdir -p tests
+
       - name: Run tests
-        run: pytest tests/
+        run: |
+          pytest tests/ || {
+            if [[ $(pytest tests/ --collect-only | grep "collected 0 items" | wc -l) -gt 0 ]]; then
+              echo "No tests found yet."
+              exit 0
+            else
+              exit 1
+            fi
+          }
 
       - name: Test Coverage
         uses: codecov/codecov-action@v3
         with:
           flags: unittests
           fail_ci_if_error: true
-
-    services:
-      redis:
-        image: redis
-        ports:
-          - 6379:6379
