@@ -6,6 +6,7 @@ The name "taura" is derived from the Kikuyu word 'Taũra', which means 'Translat
 
 Taura is a machine translation model for translating text between Kikuyu and English languages. Kikuyu is a Bantu language spoken by the Kikuyu people of Kenya. It's the most widely spoken language in Kenya, after English and Swahili.
 
+
 ## Project Structure
 
 ```
@@ -70,6 +71,9 @@ taura/
    ```
    cd src/data
    python explore_data.py
+
+   ![text_length_comparison](https://github.com/user-attachments/assets/8556c27f-5384-47ae-9b11-5964865221c0)
+
    ```
 
 2. Preprocess the data:
@@ -90,9 +94,14 @@ The model is trained using a sequence-to-sequence transformer architecture. The 
 3. Fine-tuning a pre-trained model on the Kikuyu-English dataset
 4. Regularly evaluating on a validation set to prevent overfitting
 
-![Training Loss Curve](img.png)
+![Training Loss](img.png)
 
-The graph above shows the training and validation loss over 10 epochs.
+The screenshot above shows the training and validation loss over 10 epochs.
+
+![image](https://github.com/user-attachments/assets/9dddee75-26e5-40cf-96ab-389b88e105d1)
+
+### NOTE!! The current implementation is a proof of concept only. For deployment, it requires much more training and development in order for it to be useful
+
 
 ## Model Training
 
