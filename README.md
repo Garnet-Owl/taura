@@ -72,9 +72,9 @@ taura/
    cd src/data
    python explore_data.py
 
-   ![text_length_comparison](https://github.com/user-attachments/assets/8556c27f-5384-47ae-9b11-5964865221c0)
-
    ```
+   ![text_length_comparison](https://github.com/user-attachments/assets/93705f69-81bf-45b5-83fb-72cff5efe7ee)
+
 
 2. Preprocess the data:
    ```
