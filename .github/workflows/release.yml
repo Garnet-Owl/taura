@@ -1,0 +1,55 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'  # Trigger on version tags (e.g., v1.0.0)
+
+jobs:
+  build:
+    name: Create Release
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Fetch all history for all branches and tags
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install build wheel twine
+    
+    - name: Build package
+      run: |
+        python -m build
+    
+    - name: Extract release notes
+      id: release_notes
+      run: |
+        TAG_NAME=${GITHUB_REF#refs/tags/}
+        # Extract release notes from CHANGELOG.md or generate them
+        # This is a simple example - customize as needed
+        echo "RELEASE_NOTES<<EOF" >> $GITHUB_ENV
+        echo "Release $TAG_NAME" >> $GITHUB_ENV
+        echo "" >> $GITHUB_ENV
+        echo "* Feature 1" >> $GITHUB_ENV
+        echo "* Feature 2" >> $GITHUB_ENV
+        echo "EOF" >> $GITHUB_ENV
+    
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          dist/*
+        body: ${{ env.RELEASE_NOTES }}
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

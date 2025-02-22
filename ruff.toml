@@ -1,0 +1,12 @@
+line-length = 120
+exclude = ["notebooks/", ".venv/"]
+
+[format]
+quote-style = "double"
+exclude = ["notebooks/", ".venv/"]
+
+[lint]
+extend-select = ["I"]
+ignore = ["I001", "I002"]  # Ignore specific import sorting issues
+
+exclude = ["notebooks/", ".venv/"]
