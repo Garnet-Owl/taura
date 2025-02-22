@@ -7,6 +7,7 @@ from transformers import (
     BartConfig,
     T5ForConditionalGeneration,
     T5Config,
+    AutoTokenizer,
 )
 from pathlib import Path
 import json
@@ -187,11 +188,10 @@ def get_model_size(model):
 
 if __name__ == "__main__":
     # Example usage
-    translator = KikuyuEnglishTranslator()
+    local_model_path = "../../models/best_model"  # Replace with your actual path
+    translator = KikuyuEnglishTranslator(model_name=local_model_path) #load local model
     print(f"Model size: {get_model_size(translator.model):.2f} MB")
 
-    # For demonstration only - won't actually run without tokenizer
-    # from transformers import AutoTokenizer
-    # tokenizer = AutoTokenizer.from_pretrained("Helsinki-NLP/opus-mt-en-mul")
-    # translation = translator.translate("Hello, how are you?", tokenizer)
-    # print(f"Translation: {translation}")
+    tokenizer = AutoTokenizer.from_pretrained("Helsinki-NLP/opus-mt-en-mul") # load same tokenizer as when training
+    translation = translator.translate("Hello, how are you?", tokenizer)
+    print(f"Translation: {translation}")
