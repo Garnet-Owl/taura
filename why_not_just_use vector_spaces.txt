@@ -1,0 +1,78 @@
+1. Vector Space + LSH kNN (Locality Sensitive Hashing, K Nearest Neighbor) Approach:
+
+Advantages:
+- Much simpler to implement and understand
+- Faster training time
+- Lower computational requirements
+- Works well for direct word/phrase mappings
+- Good for exact matches and close variants
+- Can work with smaller datasets
+- Easier to debug and maintain
+
+Disadvantages:
+- Struggles with context and word order
+- Poor handling of grammar differences
+- Limited ability to generalize to unseen patterns
+- May miss nuanced meanings
+- Not great for handling Kikuyu's agglutinative nature (where words combine to form complex meanings)
+- Translation quality likely to be lower
+
+2. Sequence-to-Sequence Transformer:
+
+Advantages:
+- Better handles context and word order
+- Can learn grammar rules implicitly
+- Better generalization to unseen patterns
+- Can handle complex linguistic phenomena
+- Better quality translations
+- Can capture Kikuyu's morphological complexity
+- State-of-the-art performance
+
+Disadvantages:
+- Requires more training data
+- More complex to implement
+- Higher computational requirements
+- Longer training time
+- Harder to debug when issues arise
+- May need significant fine-tuning
+
+For Kikuyu-English translation specifically:
+
+The seq2seq transformer is better because:
+1. Kikuyu and English have very different grammatical structures
+2. Kikuyu is agglutinative (morphologically complex)
+3. Context is crucial for accurate translation
+4. Word order differs significantly between the languages
+
+Demonstrating with an example from the test data:
+
+Consider this translation pair:
+Kikuyu: "Rĩrĩa Jehova onire atĩ nĩathiĩ hau gũcũthĩrĩria, Ngai akĩmwĩta arĩ kĩhinga-inĩ"
+English: "When the LORD saw that he had gone over to look, God called to him from within the bush"
+
+Key observations:
+1. Word order differences:
+   - Kikuyu: "Rĩrĩa (When) Jehova (LORD) onire (saw) atĩ (that)..."
+   - English: "When the LORD saw that..."
+
+2. Morphological complexity:
+   - "akĩmwĩta" is a single word in Kikuyu that combines multiple meanings
+   - breaks down to: "a" (he/she) + "kĩ" (tense marker) + "mw" (him) + "ĩta" (call)
+   - translates to multiple English words: "called to him"
+
+This kind of complex linguistic relationship would be very difficult for a vector space/LSH approach to capture correctly.
+A transformer model would be better at learning these patterns.
+
+However, if you want to start somewhere easier:
+1. You could begin with the vector space/LSH approach as a proof of concept
+2. Use it to build a basic translation system
+3. Later upgrade to a transformer-based approach once you have:
+   - More training data
+   - Better computational resources
+   - More complex translation requirements
+
+For starting with vector spaces/LSH, you could:
+1. Build word/phrase embeddings for both languages
+2. Use LSH for fast nearest neighbor lookup
+3. Start with direct word/phrase mappings
+4. Gradually add context windows
