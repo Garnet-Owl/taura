@@ -50,9 +50,9 @@ jobs:
         run: |
           mkdir -p tests
 
-      - name: Run tests
+      - name: Run tests and generate coverage
         run: |
-          pytest tests/ || {
+          pytest tests/ --cov=. || {
             if [[ $(pytest tests/ --collect-only | grep "collected 0 items" | wc -l) -gt 0 ]]; then
               echo "No tests found yet."
               exit 0
