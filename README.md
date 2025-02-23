@@ -110,6 +110,7 @@ Train the translation model:
 cd src/models
 python train.py --model "Helsinki-NLP/opus-mt-en-mul" --batch-size 16 --epochs 10
 ```
+#### Had to dlet the trained models because git LFS was getting full; I'll upload them to a google account (google drive) and add the link here.
 
 Options:
 - `--model`: Pretrained model to fine-tune (default: "Helsinki-NLP/opus-mt-en-mul")
